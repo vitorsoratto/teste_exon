@@ -16,13 +16,13 @@
     <nav class=" bg-gray-800 text-white p-4">
         <div class="container mx-auto">
             <ul class="flex items-center justify-center">
-                <li><a href="{{ url('/') }}">Inicio</a></li>
-                <li class="pl-4"><a href="{{ url('/produtos') }}">Cadastro de Produtos</a></li>
+                <li><a href="{{ route('index') }}">Inicio</a></li>
+                <li class="pl-4"><a href="{{ route('products.index') }}">Produtos</a></li>
             </ul>
         </div>
     </nav>
 
-    @yield('content')
+    {{ $slot }}
 
     @livewireScripts
 </body>
