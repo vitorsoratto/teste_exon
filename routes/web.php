@@ -13,10 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/produtos', function () {
-    return view('product');
-});
+Route::view('/', 'index');
