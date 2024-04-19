@@ -15,7 +15,15 @@ class ProductController extends Controller
 
     public function register()
     {
-        return view('product.register');
+        $sessionProduct = session('product');
+        $product = null;
+        if (session()->has('product')) {
+            $product = new Product($sessionProduct);
+        }
+
+        return view('product.register', [
+            'product' => $product,
+        ]);
     }
 
     public function list()
@@ -34,16 +42,23 @@ class ProductController extends Controller
 
             $product = Product::find($request->input('code'));
 
-            if ($product)
+            if ($request->method() == 'PUT' && $product) {
+                $product->description = $request->input('description');
+                $product->price = $request->input('price');
+                $product->update();
+                return redirect()->route('products.list')->with('success', 'Produto atualizado com sucesso!');
+            }
+
+            if ($product) {
                 return redirect()->back()->with('error', 'Produto já cadastrado!');
+            }
 
             $product = new Product();
             $product->code = $request->input('code');
             $product->description = $request->input('description');
             $product->price = $request->input('price');
             $product->save();
-        }
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Erro ao cadastrar produto!');
         }
 

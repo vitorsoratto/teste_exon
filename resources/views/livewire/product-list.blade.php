@@ -14,7 +14,7 @@
                 placeholder="Buscar por produtos">
         </div>
     </div>
-    <table class="w-full text-sm text-left text-gray-900 shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-900 shadow-md sm:rounded-lg table-auto">
         <thead class="text-xs text-gray-100 uppercase bg-gray-600">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -44,7 +44,8 @@
                         {{ $product->description }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        <a wire:click="editRegister({{ $product }})" class="font-medium text-blue-600 hover:underline cursor-pointer">Editar</a>
+                        <a wire:click="editRegister({{ $product }})" class="font-medium text-red-600 hover:underline cursor-pointer">Remover</a>
                     </td>
                 </tr>
             @endforeach
@@ -64,6 +65,5 @@
                 </select>
             </div>
         </div>
-        {{-- {{ $products->links() }} --}}
     </div>
 </div>

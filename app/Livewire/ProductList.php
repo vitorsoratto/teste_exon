@@ -16,4 +16,8 @@ class ProductList extends Component
             'products' => Product::search($this->search)->paginate($this->perPage),
         ]);
     }
+
+    public function editRegister($product) {
+        return redirect()->route('products.register')->with('product', $product);
+    }
 }
