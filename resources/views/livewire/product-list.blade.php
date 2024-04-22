@@ -12,7 +12,10 @@
             <input type="text" id="table-search" wire:model.live.debouce.300ms="search"
                 class="block p-2 ps-10 text-sm rounded-lg w-80 bg-gray-50 border border-gray-600 placeholder-gray-400 text-black"
                 placeholder="Buscar por produtos">
-        </div>
+            </div>
+            @if (session()->has('error'))
+                <p class="mt-2 text-sm text-red-600 font-medium">{{ session()->get('error') }}</p>
+            @endif
     </div>
     <table class="w-full text-sm text-left text-gray-900 shadow-md sm:rounded-lg table-auto">
         <thead class="text-xs text-gray-100 uppercase bg-gray-600">
@@ -44,8 +47,10 @@
                         {{ $product->description }}
                     </td>
                     <td class="px-6 py-4">
-                        <a wire:click="editRegister({{ $product }})" class="font-medium text-blue-600 hover:underline cursor-pointer">Editar</a>
-                        <a wire:click="editRegister({{ $product }})" class="font-medium text-red-600 hover:underline cursor-pointer">Remover</a>
+                        <a wire:click="editRegister({{ $product }})"
+                            class="font-medium text-blue-600 hover:underline cursor-pointer">Editar</a>
+                        <a wire:click="deleteRegister({{ $product }})"
+                            class="font-medium text-red-600 hover:underline cursor-pointer">Remover</a>
                     </td>
                 </tr>
             @endforeach

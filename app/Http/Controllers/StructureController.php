@@ -15,4 +15,8 @@ class StructureController extends Controller
     {
         return view('structure.register');
     }
+
+    public function list() {
+        return view('structure.list');
+    }
 }

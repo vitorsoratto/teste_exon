@@ -14,3 +14,4 @@ Route::put('/produtos', [ProductController::class, 'edit'])->name('products.edit
 
 Route::get('/estruturas', [StructureController::class, 'index'])->name('structures.index');
 Route::get('/estruturas/cadastro', [StructureController::class, 'register'])->name('structures.register');
+Route::get('/estruturas/listagem', [StructureController::class, 'list'])->name('structures.list');

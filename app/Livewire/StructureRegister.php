@@ -81,6 +81,18 @@ class StructureRegister extends Component
             return;
         }
 
+        $childStructure = Structure::where('master_product', $this->code)
+            ->where('child_product', $this->childCode)
+            ->first();
+
+        if ($childStructure) {
+            $childStructure->quantity = $this->quantity;
+            $childStructure->update();
+
+            $this->reset(['childCode', 'quantity']);
+
+            return;
+        }
         Structure::create([
             'master_product' => $this->code,
             'child_product' => $this->childCode,
@@ -90,7 +102,8 @@ class StructureRegister extends Component
         $this->reset(['childCode', 'quantity']);
     }
 
-    public function edit($structure) {
+    public function edit($structure)
+    {
         $this->code = $structure['code'];
         $this->searchItem();
     }

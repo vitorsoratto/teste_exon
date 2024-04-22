@@ -28,4 +28,9 @@ class Product extends Model
     {
         return $this->hasMany(Structure::class, 'master_product');
     }
+
+    public function masters()
+    {
+        return $this->hasMany(Structure::class, 'child_product');
+    }
 }
