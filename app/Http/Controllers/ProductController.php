@@ -15,9 +15,9 @@ class ProductController extends Controller
 
     public function register()
     {
-        $sessionProduct = session('product');
         $product = null;
         if (session()->has('product')) {
+            $sessionProduct = session('product');
             $product = new Product($sessionProduct);
         }
 
@@ -31,6 +31,21 @@ class ProductController extends Controller
         return view('product.list');
     }
 
+    public function edit(Request $request)
+    {
+        $product = Product::find($request->input('code'));
+
+        if (!$product) {
+            return redirect()->back()->with('error', 'Produto não encontrado!');
+        }
+
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->update();
+
+        return redirect()->route('products.list')->with('success', 'Produto atualizado com sucesso!');
+    }
+
     public function store(Request $request)
     {
         try {
@@ -41,13 +56,6 @@ class ProductController extends Controller
             ]);
 
             $product = Product::find($request->input('code'));
-
-            if ($request->method() == 'PUT' && $product) {
-                $product->description = $request->input('description');
-                $product->price = $request->input('price');
-                $product->update();
-                return redirect()->route('products.list')->with('success', 'Produto atualizado com sucesso!');
-            }
 
             if ($product) {
                 return redirect()->back()->with('error', 'Produto já cadastrado!');

@@ -18,6 +18,7 @@
             <ul class="flex items-center justify-center">
                 <li><a href="{{ route('index') }}">Inicio</a></li>
                 <li class="pl-4"><a href="{{ route('products.index') }}">Produtos</a></li>
+                <li class="pl-4"><a href="{{ route('structures.index') }}">Estruturas</a></li>
             </ul>
         </div>
     </nav>

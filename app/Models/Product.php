@@ -23,4 +23,9 @@ class Product extends Model
         $query->where('code', 'like', "%$value%")
             ->orWhere('description', 'like', "%$value%");
     }
+
+    public function children()
+    {
+        return $this->hasMany(Structure::class, 'master_product');
+    }
 }
